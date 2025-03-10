@@ -1,0 +1,18 @@
+DELIMITER //
+
+CREATE FUNCTION actividad_mas_frecuente() 
+RETURNS VARCHAR(100) DETERMINISTIC
+BEGIN
+    DECLARE actividad_max VARCHAR(100);
+
+    SELECT nombre_actividad 
+    INTO actividad_max
+    FROM actividades
+    GROUP BY nombre_actividad
+    ORDER BY COUNT(*) DESC
+    LIMIT 1;
+
+    RETURN actividad_max;
+END //
+
+DELIMITER ;
